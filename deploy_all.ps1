@@ -22,4 +22,4 @@ $parameters = @(
     $secretname
 )
 
-New-AzureRmResourceGroupDeployment -ResourceGroupName testrg -TemplateFile .\deployment.json -templateparameters $parameters
+New-AzureRmResourceGroupDeployment -ResourceGroupName testrg -TemplateFile .\deployment.json -adminUsername $parameters[0] -keyvaultid $parameter[1] -secretname $parameters[2]
