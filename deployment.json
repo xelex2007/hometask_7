@@ -6,7 +6,7 @@
       "type" : "string"
      },
      "keyvaultid" : {
-      "type" : "securestring"
+      "type" : "string"
      },
      "secretname" : {
         "type" : "string"
