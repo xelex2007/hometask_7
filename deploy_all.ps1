@@ -16,10 +16,6 @@ foreach($keyvault in $keyvaults){
     }
 }
 $secretname = (Get-AzureKeyVaultSecret -VaultName $keyvaultname | where-object{$_.name -like "admin*"}).name
-$parameters = @(
-    $adminusername,
-    $keyvaultresourceid,
-    $secretname
-)
 
-New-AzureRmResourceGroupDeployment -ResourceGroupName testrg -TemplateFile .\deployment.json -adminUsername $parameters[0] -keyvaultid $parameter[1] -secretname $parameters[2]
+
+New-AzureRmResourceGroupDeployment -ResourceGroupName testrg -TemplateFile .\deployment.json -adminUsername $adminusername -keyvaultid $keyvaultresourceid -secretname $secretname
