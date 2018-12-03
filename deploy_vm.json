@@ -3,55 +3,100 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue" : "westeurope"
         },
         "networkInterfaceName": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "vmforrestor890"
         },
         "networkSecurityGroupName": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "vmforrestor-nsg"
         },
         "networkSecurityGroupRules": {
-            "type": "array"
+            "type": "array",
+            "defaultvalue": []
         },
         "subnetName": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "default"
         },
         "virtualNetworkName": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "testrg-vnet"
         },
         "addressPrefixes": {
-            "type": "array"
+            "type": "array",
+            "defaultvalue": [
+                "10.0.0.0/24"
+            ]
         },
         "subnets": {
-            "type": "array"
+            "type": "array",
+            "defaultvalue": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                }
+            ]
         },
         "publicIpAddressName": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "vmforrestor-ip"
         },
         "publicIpAddressType": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "Dynamic"
         },
         "publicIpAddressSku": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "Basic"
         },
         "virtualMachineName": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "vmforrestor"
         },
         "virtualMachineRG": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "testrg"
         },
         "osDiskType": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "Standard_LRS"
         },
         "dataDisks": {
-            "type": "array"
+            "type": "array",
+            "defaultvalue": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "caching": "ReadOnly",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "additionaldisk",
+                    "storageAccountType": null
+                }
+            ]
         },
         "dataDiskResources": {
-            "type": "array"
+            "type": "array",
+            "defaultvalue": [
+                {
+                    "name": "additionaldisk",
+                    "diskSizeGB": 10,
+                    "sku": "Standard_LRS",
+                    "creationData": {
+                        "createOption": "empty"
+                    }
+                }
+            ]
         },
         "virtualMachineSize": {
-            "type": "string"
+            "type": "string",
+            "defaultvalue": "Standard_DS1_v2"
         },
         "adminUsername": {
             "type": "string"
