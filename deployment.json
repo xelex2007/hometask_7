@@ -2,65 +2,44 @@
    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
    "contentVersion": "1.0.0.0",
    "parameters": {
-      "adminname": {
-         "type": "string"
-      },
-      "adminpassword": {
-         "type": "securestring"
-      }
+     "adminUsername" : {
+      "type" : "string"
+     },
+     "keyvaultid" : {
+      "type" : "securestring"
+     },
+     "secretname" : {
+        "type" : "string"
+     }
    },
    "variables": {},
    "functions": [],
    "resources": [
       {
          "apiVersion": "2017-05-10",
-         "name": "linkedTemplatesql",
+         "name": "linkedTemplatevm",
          "dependsOn": [
-                         "linkedTemplatekeyvault"
                         ],
          "type": "Microsoft.Resources/deployments",
          "properties": {
             "mode": "Incremental",
             "templateLink": {
-               "uri": "https://raw.githubusercontent.com/xelex2007/hometask_6/master/deployment_sql.json",
+               "uri": "https://raw.githubusercontent.com/xelex2007/hometask_7/master/deploy_vm.json",
                "contentVersion": "1.0.0.0"
             },
-            "parametersLink": {
-               "uri":"https://raw.githubusercontent.com/xelex2007/hometask_6/master/parameters.json",
-               "contentVersion":"1.0.0.0"
-            },
             "parameters" : {
-               "username" : "[reference('linkedTemplatekeyvault').outputs.username.value]",
-               "adminpassword": {
+               "adminUsername" : {
+                 "value" : "[parameters('adminUsername')]"
+               },
+               "adminPassword": {
               
                   "reference": {
                      "keyVault": {
-                        "id": "[reference('linkedTemplatekeyvault').outputs.vaultid.value]"
+                        "id": "[parameters('keyvaultid')]"
                      },
-                     "secretName": "[reference('linkedTemplatekeyvault').outputs.username.value]"
+                     "secretName": "[parameters('secretname')]"
                   }
 }
-            }
-         }
-      },
-      {
-         "apiVersion": "2017-05-10",
-         "name": "linkedTemplatekeyvault",
-         "dependsOn": [],
-         "type": "Microsoft.Resources/deployments",
-         "properties": {
-            "mode": "Incremental",
-            "templateLink": {
-               "uri": "https://raw.githubusercontent.com/xelex2007/hometask_6/master/deployment_keyvault.json",
-               "contentVersion": "1.0.0.0"
-            },
-            "parameters": {
-               "adminname": {
-                  "value": "[parameters('adminname')]"
-               },
-               "adminpassword": {
-                  "value": "[parameters('adminpassword')]"
-               }
             }
          }
       }
