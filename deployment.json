@@ -52,7 +52,7 @@
       "properties": {
          "mode": "Incremental",
          "templateLink": {
-            "uri": "https://raw.githubusercontent.com/xelex2007/hometask_7/master/deploy_vm.json",
+            "uri": "https://raw.githubusercontent.com/xelex2007/hometask_7/master/storage_accounts.json",
             "contentVersion": "1.0.0.0"
          },
          "parameters" : {
