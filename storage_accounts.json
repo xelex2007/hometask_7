@@ -27,9 +27,10 @@
     "functions": [],
     "resources": [
         {
-            "name": "[concat(variables('storageaccountnames'), copyindex())]",
+            "name": "[variables('storageaccountnames')[copyindex()]]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2018-07-01",
+            "location" : "[variables('storageaccountLocations')[copyindex()]]",
             "copy" : {
                 "name" : "storageaccountloop",
                 "count" : "[length(variables('storageaccountLocations'))]"
