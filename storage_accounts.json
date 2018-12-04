@@ -22,8 +22,8 @@
         "names" : {
             "type" : "array",
             "defaultvalue" : [
-                "accountbackup01",
-                "accountrestore01"
+                "backup715",
+                "restore715"
             ]
         }
     },
@@ -40,7 +40,7 @@
                 "count" : "[length(parameters('names'))]"
             },
             "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2016-01-01",
+            "apiVersion": "2018-02-01",
             "location" : "[variables('storageaccountLocations')[copyIndex()]]",
             
             "sku": {
