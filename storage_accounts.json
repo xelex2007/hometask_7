@@ -18,23 +18,31 @@
         "supportsHttpsTrafficOnly": {
             "type" : "bool",
             "defaultvalue": false
+        },
+        "names" : {
+            "type" : "array",
+            "defaultvalue" : [
+                "accountbackup01",
+                "accountrestore01"
+            ]
         }
     },
     "variables": {
-        "storageaccountLocations": [ "West Europe", "East US" ],
-        "storageaccountnames": [ "storageaccountbackup", "storageaccountrestore" ]
+        "storageaccountLocations": [ "West Europe", "East US" ]
+        
     },
     "functions": [],
     "resources": [
         {
-            "name": "[variables('storageaccountnames')[copyindex()]]",
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2018-07-01",
-            "location" : "[variables('storageaccountLocations')[copyindex()]]",
+            "name": "[concat('storage', parameters('names')[copyIndex()])]",
             "copy" : {
-                "name" : "storageaccountloop",
-                "count" : "[length(variables('storageaccountLocations'))]"
+                "name" : "storagecopy",
+                "count" : "[length(parameters('names'))]"
             },
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2016-01-01",
+            "location" : "[variables('storageaccountLocations')[copyIndex()]]",
+            
             "sku": {
               "name": "[parameters('accounttype')]"
              
