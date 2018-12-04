@@ -1,0 +1,54 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      
+        "accountType": {
+            "type" : "string",
+            "defaultvalue": "Standard_RAGRS"
+        },
+        "kind": {
+            "type" : "string",
+            "defaultvalue": "StorageV2"
+        },
+        "accessTier": {
+            "type" : "string",
+            "defaultvalue": "Hot"
+        },
+        "supportsHttpsTrafficOnly": {
+            "type" : "bool",
+            "defaultvalue": false
+        }
+    },
+    "variables": {
+        "storageaccountLocations": [ "West Europe", "East US" ],
+        "storageaccountnames": [ "storageaccountbackup", "storageaccountrestore" ]
+    },
+    "functions": [],
+    "resources": [
+        {
+            "name": "[concat(variables('storageaccountnames'), copyindex())]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2018-07-01",
+            "copy" : {
+                "name" : "storageaccountloop",
+                "count" : "[length(variables('storageaccountLocations'))]"
+            },
+            "sku": {
+              "name": "[parameters('accounttype')]"
+             
+            },
+            "kind": "[parameters('kind')]",
+           
+            "properties": {
+            
+              
+              "accessTier": "[parameters('accessTier')]",
+             
+              "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]"
+              
+            }
+          }
+    ],
+    "outputs": {}
+ }
